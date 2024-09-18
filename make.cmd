@@ -2,10 +2,15 @@
 title compiling
 setlocal enabledelayedexpansion
 if "%~1"=="" (set "execname=main.exe") else set "execname=%~1"
-::TODO read from file or launch arg
-:: setts basic things
+:: sets basic things
 set filelist=filelist.txt
 :: set the filelist variable
+
+if not exist %filelist% (
+    goto listmissing
+)
+
+::FIXME implement check when file empty
 
 :start
 :: main program, never called, for clean code purposes
@@ -44,6 +49,7 @@ goto succesfullexit
 :: a compile error has occured, exit
 echo a compiling error has occured!
 echo press any key to exit..
+set /A ERRORLEVEL=1
 pause > null
 exit
 
@@ -51,6 +57,7 @@ exit
 :: a link error has occured, exit
 echo a link error has occured!
 echo press any key to exit..
+set /A ERRORLEVEL=1
 pause > null
 exit
 
@@ -58,6 +65,7 @@ exit
 :: file list is missing, exit
 echo file list is missing!
 echo press any key to exit..
+set /A ERRORLEVEL=1
 pause > null
 exit
 
@@ -65,15 +73,18 @@ exit
 :: file list is empty, exit
 echo file list is empty!
 echo press any key to exit..
+set /A ERRORLEVEL=1
 pause > null
 exit
 
 :genericerror
 :: generic error, exit
 echo press any key to exit..
+set /A ERRORLEVEL=1
 pause > null
 exit
 
 :succesfullexit
 :: quiet exit, for succesfull build
+set /A ERRORLEVEL=0
 exit
