@@ -8,4 +8,4 @@ now only existing launch arg is to set final executable name:
 feel free to open issues and prs.  
 this is activly maintained.  
 
-![gif](https://c.tenor.com/MmmmxhTSSukAAAAd/tenor.gif) 
+![gif](https://github.com/user-attachments/assets/d39f6520-78fd-4429-bd00-d9322dc6ec92)
