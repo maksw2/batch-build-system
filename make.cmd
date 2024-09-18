@@ -49,40 +49,35 @@ goto succesfullexit
 :: a compile error has occured, exit
 echo a compiling error has occured!
 echo press any key to exit..
-set /A ERRORLEVEL=1
 pause > null
-exit
+exit 1
 
 :linkerror
 :: a link error has occured, exit
 echo a link error has occured!
 echo press any key to exit..
-set /A ERRORLEVEL=1
 pause > null
-exit
+exit 1
 
 :listmissing
 :: file list is missing, exit
 echo file list is missing!
 echo press any key to exit..
-set /A ERRORLEVEL=1
 pause > null
-exit
+exit 1
 
 :listempty
 :: file list is empty, exit
 echo file list is empty!
 echo press any key to exit..
-set /A ERRORLEVEL=1
 pause > null
-exit
+exit 1
 
 :genericerror
 :: generic error, exit
 echo press any key to exit..
-set /A ERRORLEVEL=1
 pause > null
-exit
+exit 1
 
 :succesfullexit
 :: quiet exit, for succesfull build
