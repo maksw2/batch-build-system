@@ -12,5 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: build
+      shell: cmd
       run: make.cmd
       
