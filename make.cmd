@@ -2,13 +2,12 @@
 title compiling
 setlocal enabledelayedexpansion
 if "%~1"=="" (set "execname=main.exe") else set "execname=%~1"
-:: sets basic things
 set filelist=filelist.txt
-:: set the filelist variable
+set config=config.txt
 
 if not exist %filelist% (
     goto listmissing
-) else if "%~z1" == "0" ( 
+) else if "%filelist%" == "0" ( 
     goto listempty
 )
 
@@ -19,9 +18,18 @@ for /f "tokens=*" %%a in (%filelist%) do (
     set /a linecount+=1
     set /a currentline+=1
 )
-
 :: reads the file list and puts them into a variable
 :: also stores how many variables/lines there are
+
+set /a linecount2=0
+set /a currentline2=1
+for /f "tokens=*" %%a in (%config%) do (
+    set configline[!currentline2!]=%%a
+    set /a linecount2+=1
+    set /a currentline2+=1
+)
+:: pretty much the same but for the config
+
 set "link_files="
 :: variable to store all files to link
 for /l %%i in (1,1,%linecount%) do (
@@ -33,7 +41,7 @@ goto compile
 :: compile part of the program
 for /l %%i in (1,1,%linecount%) do (
     echo compiling !line[%%i]!.cpp
-    g++ -c !line[%%i]!.cpp || goto compileerror
+    g++ -c !line[%%i]!.cpp %configline[0]% || goto compileerror
 )
 :: compiled all files
 goto link
