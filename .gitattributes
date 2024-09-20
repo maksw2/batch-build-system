@@ -1,0 +1,8 @@
+*.o binary
+*.exe binary
+*.a binary
+*.pdb binary
+*.txt text
+*.cpp text
+*.cmd text
+*.h text
