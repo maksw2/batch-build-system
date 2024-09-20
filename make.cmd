@@ -52,6 +52,11 @@ goto link
 echo linking...
 g++ -o %execname% %link_files% || goto linkerror
 :: linked all files
+goto strip
+
+:strip
+echo stripping...
+strip %execname%
 goto clean
 
 :clean
