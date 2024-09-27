@@ -18,8 +18,6 @@ for /f "tokens=*" %%a in (%filelist%) do (
     set /a linecount+=1
     set /a currentline+=1
 )
-:: reads the file list and puts them into a variable
-:: also stores how many variables/lines there are
 
 set /a linecount2=0
 set /a currentline2=1
@@ -28,35 +26,34 @@ for /f "tokens=*" %%a in (%config%) do (
     set /a linecount2+=1
     set /a currentline2+=1
 )
-:: pretty much the same but for the config
 
 set "link_files="
 :: variable to store all files to link
 for /l %%i in (1,1,%linecount%) do (
     set "link_files=!link_files! !line[%%i]!.o"
 )
-goto compile
 
 :compile
 :: compile part of the program
 for /l %%i in (1,1,%linecount%) do (
-    echo compiling !line[%%i]!.cpp
-    g++ -c !line[%%i]!.cpp %configline[0]% || goto compileerror
+    set "source_file=!line[%%i]!.cpp"
+    set "output_file=!line[%%i]!.o"
+    echo compiling !source_file!
+    g++ -c "!source_file!" -o "!output_file!" %configline[0]% || goto compileerror
 )
-:: compiled all files
+
 goto link
 
 :link
 :: link part of the program
-:: links all files together to an exe
 echo linking...
-g++ -o %execname% %link_files% || goto linkerror
+g++ -o "%execname%" %link_files% || goto linkerror
 :: linked all files
 goto strip
 
 :strip
 echo stripping...
-strip %execname%
+strip "%execname%"
 goto clean
 
 :clean
@@ -65,15 +62,15 @@ del /Q %link_files%
 goto exit
 
 :compileerror
-:: a compile error has occured, exit
-echo a compiling error has occured!
+:: a compile error has occurred, exit
+echo a compiling error has occurred!
 echo press any key to exit..
 pause > nul
 exit 1
 
 :linkerror
-:: a link error has occured, exit
-echo a link error has occured!
+:: a link error has occurred, exit
+echo a link error has occurred!
 echo press any key to exit..
 pause > nul
 exit 1
@@ -95,4 +92,4 @@ exit 1
 :exit
 echo press any key to exit..
 pause > nul
-exit
+:: exit
