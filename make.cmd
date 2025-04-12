@@ -54,7 +54,7 @@ for /f "usebackq tokens=*" %%c in ("%config%") do (
 :: Compile source files
 set "obj_files="
 for /f "usebackq tokens=*" %%f in ("%filelist%") do (
-    set "src=%%f.cpp"
+    set "src=%%f"
     set "obj=%%f.o"
     echo !CYAN!Compiling !src!...!RESET!
     g++ -c "!src!" -o "!obj!" !flags!
