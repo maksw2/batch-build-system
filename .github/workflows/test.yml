@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: build
       shell: cmd
-      run: make.cmd
+      run: make.cmd --no-wait
     - name: Is file created?
       if: ${{ hashFiles('main.exe') == '' }}
       run: exit 1

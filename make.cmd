@@ -5,6 +5,12 @@ setlocal enabledelayedexpansion
 :: Set ESC variable
 call :setESC
 
+:: Argument parsing
+set "NOWAIT=false"
+if "%~1"=="--no-wait" (
+    set "NOWAIT=true"
+)
+
 :: Predefine common colors using delayed expansion-safe syntax
 set "RESET=!ESC![0m"
 set "RED=!ESC![31m"
@@ -83,12 +89,16 @@ del /Q !obj_files!
 
 :: The exit
 echo !GREEN!Done!RESET!
-timeout /t 2 /nobreak > NUL
+if /i "!NOWAIT!"=="false" (
+    timeout /t 2 /nobreak > nul
+)
 goto :eof
 
 :waitexit
-echo !YELLOW!Press any key to exit...!RESET!
-pause >nul
+if /i "!NOWAIT!"=="false" (
+    echo !YELLOW!Press any key to exit...!RESET!
+    pause >nul
+)
 exit /b
 
 :setESC
