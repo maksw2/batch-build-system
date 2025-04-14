@@ -38,7 +38,6 @@ echo.
 
 :: Default executable name
 set "execname=main.exe"
-if not "%~1"=="" set "execname=%~1"
 
 set "filelist=filelist.txt"
 set "config=config.txt"
