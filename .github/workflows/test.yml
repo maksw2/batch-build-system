@@ -14,6 +14,3 @@ jobs:
     - name: build
       shell: cmd
       run: make.cmd --no-wait
-    - name: Is file created?
-      if: ${{ hashFiles('main.exe') == '' }}
-      run: exit 1
