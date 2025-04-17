@@ -1,10 +1,9 @@
-# my attempt at a build system. 
-it's very limited because windows batch.  
+# my attempt at a build system.  
 uses g++ and a file list (filelist.txt)  
 in the future i want to add options for multiple compilers, building dlls and static libraries,  
 configuration files, including filelists from filelists.  
 now only existing launch arg is to disable exit/wait:  
-`make.cmd --no-wait` 
+`make.ps1 --no-wait` 
 feel free to open issues and prs.  
 this is (usually) activly maintained.  
 

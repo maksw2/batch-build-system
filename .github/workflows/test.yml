@@ -2,15 +2,16 @@ name: test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: '*'
   pull_request:
-    branches: [ "main" ]
+    branches: '*'
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
+    
     - name: build
-      shell: cmd
-      run: make.cmd --no-wait
+      shell: pwsh
+      run: .\make.ps1 --no-wait
